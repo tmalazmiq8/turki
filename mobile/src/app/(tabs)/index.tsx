@@ -39,7 +39,7 @@ export default function HomeScreen() {
 
         <Text style={styles.sectionHeader}>{t(S.quickActions, language)}</Text>
         <View style={[styles.quickRow, isRTL && styles.rowReverse]}>
-          <Link href="/(tabs)/materials" asChild>
+          <Link href="/materials" asChild>
             <Pressable style={{ flex: 1 }}>
               <Card style={styles.quickCard}>
                 <Ionicons name="flask-outline" size={22} color={Theme.gold} />
@@ -47,7 +47,7 @@ export default function HomeScreen() {
               </Card>
             </Pressable>
           </Link>
-          <Link href="/(tabs)/ifra" asChild>
+          <Link href="/ifra" asChild>
             <Pressable style={{ flex: 1 }}>
               <Card style={styles.quickCard}>
                 <Ionicons name="shield-checkmark-outline" size={22} color={Theme.gold} />

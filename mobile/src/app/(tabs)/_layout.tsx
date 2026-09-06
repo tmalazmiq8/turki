@@ -24,17 +24,26 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="materials"
+        name="calculator"
         options={{
-          title: t(S.tabMaterials, language),
-          tabBarIcon: ({ color, size }) => <Ionicons name="flask-outline" size={size} color={color} />,
+          title: t(S.tabCalculator, language),
+          tabBarIcon: ({ color, size }) => <Ionicons name="options-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="ifra"
+        name="market"
         options={{
-          title: t(S.tabIfra, language),
-          tabBarIcon: ({ color, size }) => <Ionicons name="shield-checkmark-outline" size={size} color={color} />,
+          title: t(S.tabMarket, language),
+          tabBarIcon: ({ color, size }) => <Ionicons name="bag-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="community"
+        options={{
+          title: t(S.tabCommunity, language),
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="chatbubbles-outline" size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen

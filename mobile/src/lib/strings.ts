@@ -16,8 +16,9 @@ export const S = {
   appTagline: { ar: 'عالم العطور بين يديك', en: 'The world of perfumery in your hands' },
 
   tabHome: { ar: 'الرئيسية', en: 'Home' },
-  tabMaterials: { ar: 'المواد', en: 'Materials' },
-  tabIfra: { ar: 'سلامة IFRA', en: 'IFRA safety' },
+  tabCalculator: { ar: 'الحاسبة', en: 'Calculator' },
+  tabMarket: { ar: 'السوق', en: 'Market' },
+  tabCommunity: { ar: 'المجتمع', en: 'Community' },
   tabAccount: { ar: 'حسابي', en: 'Account' },
 
   save: { ar: 'حفظ', en: 'Save' },
@@ -114,6 +115,36 @@ export const S = {
   ifraSpecified: { ar: 'مواصفات خاصة', en: 'Specification' },
   ifraNotListed: { ar: 'غير مدرجة', en: 'Not listed' },
   ifraStatusUnverified: { ar: 'غير مُتحقق منها', en: 'Unverified' },
+
+  // Calculator
+  calculator: { ar: 'حاسبة العطور', en: 'Perfume calculator' },
+  newFormula: { ar: 'تركيبة جديدة', en: 'New formula' },
+  formulaName: { ar: 'اسم التركيبة', en: 'Formula name' },
+  bottleSize: { ar: 'حجم القارورة', en: 'Bottle size' },
+  milliliters: { ar: 'مل', en: 'ml' },
+  concentration: { ar: 'التركيز', en: 'Concentration' },
+  addMaterial: { ar: 'إضافة مادة', en: 'Add material' },
+  totalPercentage: { ar: 'مجموع النسب', en: 'Total percentage' },
+  totalCost: { ar: 'التكلفة الإجمالية', en: 'Total cost' },
+  noFormulas: { ar: 'لا توجد تركيبات بعد', en: 'No formulas yet' },
+  noFormulasHint: { ar: 'ابدأ تركيبتك الأولى', en: 'Start your first formula' },
+  delete: { ar: 'حذف', en: 'Delete' },
+
+  // Market
+  market: { ar: 'السوق', en: 'Market' },
+  newListing: { ar: 'إعلان جديد', en: 'New listing' },
+  listingTitle: { ar: 'العنوان', en: 'Title' },
+  description: { ar: 'الوصف', en: 'Description' },
+  price: { ar: 'السعر', en: 'Price' },
+  category: { ar: 'الفئة', en: 'Category' },
+  post: { ar: 'نشر', en: 'Post' },
+  noListings: { ar: 'لا توجد إعلانات بعد', en: 'No listings yet' },
+
+  // Community
+  community: { ar: 'المجتمع', en: 'Community' },
+  newPost: { ar: 'منشور جديد', en: 'New post' },
+  writeSomething: { ar: 'اكتب شيئًا...', en: 'Write something...' },
+  noPosts: { ar: 'لا توجد منشورات بعد', en: 'No posts yet' },
 
   // Account / settings
   account: { ar: 'حسابي', en: 'Account' },
