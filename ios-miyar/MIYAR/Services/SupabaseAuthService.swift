@@ -271,6 +271,11 @@ nonisolated enum SupabaseAuthService {
         do {
             return try await URLSession.shared.data(for: request)
         } catch {
+            // The user-facing message is a generic "check your connection", but
+            // the underlying URLError code (printed here) is what actually
+            // tells you why: offline, DNS failure, TLS/ATS rejection, timeout,
+            // etc. Check Xcode's console when this fires.
+            print("⚠️ Supabase network request failed: \(error)")
             throw SupabaseAuthError.network
         }
     }
