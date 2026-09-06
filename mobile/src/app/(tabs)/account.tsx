@@ -1,4 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { Link } from 'expo-router';
 import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Card } from '@/components/card';
 import { InkButton } from '@/components/buttons';
@@ -20,6 +21,28 @@ export default function AccountScreen() {
           <Text style={[styles.label, { textAlign: isRTL ? 'right' : 'left' }]}>{t(S.email, language)}</Text>
           <Text style={[styles.value, { textAlign: isRTL ? 'right' : 'left' }]}>{session?.user.email ?? '—'}</Text>
         </Card>
+
+        <Link href="/edit-profile" asChild>
+          <Pressable>
+            <Card style={[styles.row, isRTL && styles.rowReverse]}>
+              <Ionicons name="person-circle-outline" size={18} color={Theme.gold} />
+              <Text style={styles.rowText}>{t(S.editProfile, language)}</Text>
+              <View style={{ flex: 1 }} />
+              <Ionicons name={isRTL ? 'chevron-back-outline' : 'chevron-forward-outline'} size={14} color={Theme.secondaryText} />
+            </Card>
+          </Pressable>
+        </Link>
+
+        <Link href="/security" asChild>
+          <Pressable>
+            <Card style={[styles.row, isRTL && styles.rowReverse]}>
+              <Ionicons name="lock-closed-outline" size={18} color={Theme.gold} />
+              <Text style={styles.rowText}>{t(S.security, language)}</Text>
+              <View style={{ flex: 1 }} />
+              <Ionicons name={isRTL ? 'chevron-back-outline' : 'chevron-forward-outline'} size={14} color={Theme.secondaryText} />
+            </Card>
+          </Pressable>
+        </Link>
 
         <Pressable onPress={toggleLanguage}>
           <Card style={[styles.row, isRTL && styles.rowReverse]}>

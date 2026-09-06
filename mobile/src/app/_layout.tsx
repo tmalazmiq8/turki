@@ -40,6 +40,12 @@ function RootNavigator() {
         <Stack.Screen name="ifra" options={detailHeaderOptions} />
         <Stack.Screen name="book" options={detailHeaderOptions} />
         <Stack.Screen name="book/[id]" options={detailHeaderOptions} />
+        <Stack.Screen name="glossary" options={detailHeaderOptions} />
+        <Stack.Screen name="glossary/[id]" options={detailHeaderOptions} />
+        <Stack.Screen name="search" options={detailHeaderOptions} />
+        <Stack.Screen name="notifications" options={detailHeaderOptions} />
+        <Stack.Screen name="edit-profile" options={detailHeaderOptions} />
+        <Stack.Screen name="security" options={detailHeaderOptions} />
         <Stack.Screen name="listing/[id]" options={detailHeaderOptions} />
         <Stack.Screen name="formula/[id]" options={detailHeaderOptions} />
       </Stack.Protected>

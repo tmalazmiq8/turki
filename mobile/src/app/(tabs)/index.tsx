@@ -18,6 +18,13 @@ function greeting(): typeof S.goodMorning {
   return S.goodEvening;
 }
 
+const quickActions: { href: '/materials' | '/ifra' | '/book' | '/glossary'; icon: string; label: typeof S.materialsLibrary }[] = [
+  { href: '/materials', icon: 'flask-outline', label: S.materialsLibrary },
+  { href: '/ifra', icon: 'shield-checkmark-outline', label: S.ifra },
+  { href: '/book', icon: 'book-outline', label: S.book },
+  { href: '/glossary', icon: 'library-outline', label: S.glossary },
+];
+
 export default function HomeScreen() {
   const { language, isRTL } = useLanguage();
 
@@ -32,37 +39,32 @@ export default function HomeScreen() {
               <Text style={styles.appName}>{t(S.appName, language)}</Text>
             </View>
           </View>
-          <Pressable onPress={() => Linking.openURL(IFRAInfo.materialsSearch)} style={styles.iconButton}>
-            <Ionicons name="shield-checkmark-outline" size={20} color={Theme.ink} />
-          </Pressable>
+          <View style={[styles.headerIcons, isRTL && styles.rowReverse]}>
+            <Link href="/search" asChild>
+              <Pressable style={styles.iconButton}>
+                <Ionicons name="search-outline" size={18} color={Theme.ink} />
+              </Pressable>
+            </Link>
+            <Link href="/notifications" asChild>
+              <Pressable style={styles.iconButton}>
+                <Ionicons name="notifications-outline" size={18} color={Theme.ink} />
+              </Pressable>
+            </Link>
+          </View>
         </View>
 
         <Text style={styles.sectionHeader}>{t(S.quickActions, language)}</Text>
-        <View style={[styles.quickRow, isRTL && styles.rowReverse]}>
-          <Link href="/materials" asChild>
-            <Pressable style={{ flex: 1 }}>
-              <Card style={styles.quickCard}>
-                <Ionicons name="flask-outline" size={22} color={Theme.gold} />
-                <Text style={styles.quickText}>{t(S.materialsLibrary, language)}</Text>
-              </Card>
-            </Pressable>
-          </Link>
-          <Link href="/ifra" asChild>
-            <Pressable style={{ flex: 1 }}>
-              <Card style={styles.quickCard}>
-                <Ionicons name="shield-checkmark-outline" size={22} color={Theme.gold} />
-                <Text style={styles.quickText}>{t(S.ifra, language)}</Text>
-              </Card>
-            </Pressable>
-          </Link>
-          <Link href="/book" asChild>
-            <Pressable style={{ flex: 1 }}>
-              <Card style={styles.quickCard}>
-                <Ionicons name="book-outline" size={22} color={Theme.gold} />
-                <Text style={styles.quickText}>{t(S.book, language)}</Text>
-              </Card>
-            </Pressable>
-          </Link>
+        <View style={styles.grid}>
+          {quickActions.map((action) => (
+            <Link key={action.href} href={action.href} asChild>
+              <Pressable style={styles.gridItem}>
+                <Card style={styles.quickCard}>
+                  <Ionicons name={action.icon as any} size={22} color={Theme.gold} />
+                  <Text style={styles.quickText}>{t(action.label, language)}</Text>
+                </Card>
+              </Pressable>
+            </Link>
+          ))}
         </View>
 
         <Pressable onPress={() => Linking.openURL(IFRAInfo.materialsSearch)}>
@@ -70,7 +72,7 @@ export default function HomeScreen() {
             <Ionicons name="globe-outline" size={18} color={Theme.gold} />
             <Text style={styles.linkText}>{t(S.ifraOfficialSearch, language)}</Text>
             <View style={{ flex: 1 }} />
-            <Ionicons name={isRTL ? 'arrow-up-outline' : 'arrow-up-outline'} size={14} color={Theme.secondaryText} />
+            <Ionicons name="arrow-up-outline" size={14} color={Theme.secondaryText} />
           </Card>
         </Pressable>
       </ScrollView>
@@ -82,14 +84,15 @@ const styles = StyleSheet.create({
   content: { padding: Theme.margin, gap: 18 },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  headerIcons: { flexDirection: 'row', gap: 8 },
   rowReverse: { flexDirection: 'row-reverse' },
   logo: { width: 36, height: 36 },
   greeting: { fontSize: 13, color: Theme.secondaryText },
   appName: { fontSize: 20, fontWeight: '600', color: Theme.ink },
   iconButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: Theme.surface,
     borderWidth: 1,
     borderColor: Theme.hairline,
@@ -103,7 +106,8 @@ const styles = StyleSheet.create({
     color: Theme.secondaryText,
     textTransform: 'uppercase',
   },
-  quickRow: { flexDirection: 'row', gap: 12 },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
+  gridItem: { width: '47%' },
   quickCard: { alignItems: 'center', gap: 8, paddingVertical: 20 },
   quickText: { fontSize: 13, fontWeight: '600', color: Theme.ink, textAlign: 'center' },
   linkCard: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 14 },

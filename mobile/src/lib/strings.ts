@@ -22,6 +22,7 @@ export const S = {
   tabAccount: { ar: 'حسابي', en: 'Account' },
 
   save: { ar: 'حفظ', en: 'Save' },
+  saveChanges: { ar: 'حفظ التغييرات', en: 'Save changes' },
   cancel: { ar: 'إلغاء', en: 'Cancel' },
   close: { ar: 'إغلاق', en: 'Close' },
   search: { ar: 'بحث', en: 'Search' },
@@ -78,6 +79,9 @@ export const S = {
   goodAfternoon: { ar: 'مساء الخير', en: 'Good afternoon' },
   goodEvening: { ar: 'مساء الخير', en: 'Good evening' },
   quickActions: { ar: 'إجراءات سريعة', en: 'Quick actions' },
+  searchEverything: { ar: 'ابحث في المواد والمصطلحات…', en: 'Search materials and terms…' },
+  notifications: { ar: 'الإشعارات', en: 'Notifications' },
+  noNotifications: { ar: 'لا توجد إشعارات', en: 'No notifications' },
 
   // Materials library
   materialsLibrary: { ar: 'مكتبة المواد', en: 'Materials library' },
@@ -115,6 +119,11 @@ export const S = {
   ifraSpecified: { ar: 'مواصفات خاصة', en: 'Specification' },
   ifraNotListed: { ar: 'غير مدرجة', en: 'Not listed' },
   ifraStatusUnverified: { ar: 'غير مُتحقق منها', en: 'Unverified' },
+
+  // Glossary
+  glossary: { ar: 'المسرد اللغوي', en: 'Glossary' },
+  example: { ar: 'مثال', en: 'Example' },
+  relatedTerms: { ar: 'مصطلحات ذات صلة', en: 'Related terms' },
 
   // Book
   book: { ar: 'مصمم العطور', en: 'The Perfume Designer' },
@@ -162,4 +171,20 @@ export const S = {
   language: { ar: 'اللغة', en: 'Language' },
   officialWebsites: { ar: 'مواقع رسمية', en: 'Official websites' },
   aboutApp: { ar: 'عن التطبيق', en: 'About the app' },
+  editProfile: { ar: 'تعديل الملف الشخصي', en: 'Edit profile' },
+  bio: { ar: 'نبذة', en: 'Bio' },
+  location: { ar: 'الموقع', en: 'Location' },
+  security: { ar: 'الأمان', en: 'Security' },
+  changePassword: { ar: 'تغيير كلمة المرور', en: 'Change password' },
+  currentPassword: { ar: 'كلمة المرور الحالية', en: 'Current password' },
+  newPassword: { ar: 'كلمة المرور الجديدة', en: 'New password' },
+  deleteAccount: { ar: 'حذف الحساب', en: 'Delete account' },
+  deleteAccountHint: {
+    ar: 'حذف الحساب نهائي ولا يمكن التراجع عنه.',
+    en: 'Deleting your account is permanent and cannot be undone.',
+  },
+  deleteWarning: {
+    ar: 'سيتم تسجيل خروجك وحذف بياناتك المحلية. لحذف الحساب نهائيًا تواصل مع الدعم.',
+    en: 'You will be signed out and your local data cleared. Contact support to permanently delete the account.',
+  },
 } satisfies Record<string, LText>;
