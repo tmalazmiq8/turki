@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "MIYAR",
+    "slug": "miyar",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "miyar",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F7F3EB",
+    "ios": {
+      "bundleIdentifier": "com.miyar.app",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.miyar.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#F7F3EB",
+        "foregroundImage": "./assets/images/icon.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F7F3EB",
+          "image": "./assets/images/logo.png",
+          "imageWidth": 180
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
