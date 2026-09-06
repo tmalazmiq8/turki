@@ -17,9 +17,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('ar');
 
   useEffect(() => {
-    AsyncStorage.getItem(STORAGE_KEY).then((stored) => {
-      if (stored === 'ar' || stored === 'en') setLanguageState(stored);
-    });
+    AsyncStorage.getItem(STORAGE_KEY)
+      .then((stored) => {
+        if (stored === 'ar' || stored === 'en') setLanguageState(stored);
+      })
+      .catch(() => {});
   }, []);
 
   const setLanguage = (next: Language) => {
