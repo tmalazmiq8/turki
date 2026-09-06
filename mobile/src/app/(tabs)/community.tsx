@@ -1,9 +1,10 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Card } from '@/components/card';
 import { GoldButton } from '@/components/buttons';
 import { Screen } from '@/components/screen';
+import { StatsRow } from '@/components/stats-row';
 import { useAuth } from '@/context/auth-context';
 import { useAppData } from '@/context/data-context';
 import { useLanguage } from '@/context/language-context';
@@ -16,6 +17,9 @@ export default function CommunityScreen() {
   const { posts, addPost, toggleLike } = useAppData();
   const { session } = useAuth();
   const [draft, setDraft] = useState('');
+
+  const memberCount = useMemo(() => new Set(posts.map((p) => p.authorEmail)).size, [posts]);
+  const likeTotal = useMemo(() => posts.reduce((sum, p) => sum + p.likeCount, 0), [posts]);
 
   const submit = () => {
     if (!draft.trim()) return;
@@ -39,7 +43,15 @@ export default function CommunityScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
-          <Card style={{ gap: 10, marginBottom: 12 }}>
+          <View style={{ gap: 12, marginBottom: 12 }}>
+            <StatsRow
+              stats={[
+                { value: memberCount, label: t(S.members, language) },
+                { value: posts.length, label: t(S.posts, language) },
+                { value: likeTotal, label: t(S.totalLikes, language) },
+              ]}
+            />
+            <Card style={{ gap: 10 }}>
             <TextInput
               value={draft}
               onChangeText={setDraft}
@@ -49,7 +61,8 @@ export default function CommunityScreen() {
               style={[styles.composer, { textAlign: isRTL ? 'right' : 'left' }]}
             />
             <GoldButton title={t(S.post, language)} onPress={submit} disabled={!draft.trim()} />
-          </Card>
+            </Card>
+          </View>
         }
         ListEmptyComponent={<Text style={styles.emptyText}>{t(S.noPosts, language)}</Text>}
         renderItem={({ item }) => (

@@ -38,6 +38,8 @@ function RootNavigator() {
         <Stack.Screen name="material/[id]" options={detailHeaderOptions} />
         <Stack.Screen name="materials" options={detailHeaderOptions} />
         <Stack.Screen name="ifra" options={detailHeaderOptions} />
+        <Stack.Screen name="book" options={detailHeaderOptions} />
+        <Stack.Screen name="book/[id]" options={detailHeaderOptions} />
         <Stack.Screen name="listing/[id]" options={detailHeaderOptions} />
         <Stack.Screen name="formula/[id]" options={detailHeaderOptions} />
       </Stack.Protected>

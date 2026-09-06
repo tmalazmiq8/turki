@@ -55,6 +55,14 @@ export default function HomeScreen() {
               </Card>
             </Pressable>
           </Link>
+          <Link href="/book" asChild>
+            <Pressable style={{ flex: 1 }}>
+              <Card style={styles.quickCard}>
+                <Ionicons name="book-outline" size={22} color={Theme.gold} />
+                <Text style={styles.quickText}>{t(S.book, language)}</Text>
+              </Card>
+            </Pressable>
+          </Link>
         </View>
 
         <Pressable onPress={() => Linking.openURL(IFRAInfo.materialsSearch)}>

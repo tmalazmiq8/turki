@@ -1,11 +1,12 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FlatList, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Card } from '@/components/card';
 import { GoldButton } from '@/components/buttons';
 import { Field } from '@/components/field';
 import { Screen } from '@/components/screen';
+import { StatsRow } from '@/components/stats-row';
 import { useAuth } from '@/context/auth-context';
 import { useAppData } from '@/context/data-context';
 import { useLanguage } from '@/context/language-context';
@@ -22,6 +23,12 @@ export default function MarketScreen() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+
+  const sellerCount = useMemo(() => new Set(listings.map((l) => l.sellerEmail)).size, [listings]);
+  const avgPrice = useMemo(
+    () => (listings.length ? listings.reduce((sum, l) => sum + l.priceUSD, 0) / listings.length : 0),
+    [listings],
+  );
 
   const submit = () => {
     if (!title.trim()) return;
@@ -43,7 +50,14 @@ export default function MarketScreen() {
 
   return (
     <Screen title={t(S.market, language)}>
-      <View style={{ paddingHorizontal: Theme.margin, marginBottom: 12 }}>
+      <View style={{ paddingHorizontal: Theme.margin, marginBottom: 12, gap: 12 }}>
+        <StatsRow
+          stats={[
+            { value: listings.length, label: t(S.activeListings, language) },
+            { value: sellerCount, label: t(S.sellers, language) },
+            { value: `$${avgPrice.toFixed(0)}`, label: t(S.avgPrice, language) },
+          ]}
+        />
         <GoldButton title={t(S.newListing, language)} onPress={() => setModalOpen(true)} />
       </View>
 

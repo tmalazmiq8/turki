@@ -116,6 +116,11 @@ export const S = {
   ifraNotListed: { ar: 'غير مدرجة', en: 'Not listed' },
   ifraStatusUnverified: { ar: 'غير مُتحقق منها', en: 'Unverified' },
 
+  // Book
+  book: { ar: 'مصمم العطور', en: 'The Perfume Designer' },
+  bookSubtitle: { ar: 'كتاب تعليمي في صناعة العطور', en: 'An educational book on perfume-making' },
+  minutesRead: { ar: 'دقائق قراءة', en: 'min read' },
+
   // Calculator
   calculator: { ar: 'حاسبة العطور', en: 'Perfume calculator' },
   newFormula: { ar: 'تركيبة جديدة', en: 'New formula' },
@@ -139,12 +144,18 @@ export const S = {
   category: { ar: 'الفئة', en: 'Category' },
   post: { ar: 'نشر', en: 'Post' },
   noListings: { ar: 'لا توجد إعلانات بعد', en: 'No listings yet' },
+  activeListings: { ar: 'إعلانات نشطة', en: 'Active listings' },
+  sellers: { ar: 'بائع', en: 'Sellers' },
+  avgPrice: { ar: 'متوسط السعر', en: 'Avg. price' },
 
   // Community
   community: { ar: 'المجتمع', en: 'Community' },
   newPost: { ar: 'منشور جديد', en: 'New post' },
   writeSomething: { ar: 'اكتب شيئًا...', en: 'Write something...' },
   noPosts: { ar: 'لا توجد منشورات بعد', en: 'No posts yet' },
+  members: { ar: 'عضو', en: 'Members' },
+  posts: { ar: 'منشور', en: 'Posts' },
+  totalLikes: { ar: 'إعجاب', en: 'Likes' },
 
   // Account / settings
   account: { ar: 'حسابي', en: 'Account' },
