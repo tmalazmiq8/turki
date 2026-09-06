@@ -1,5 +1,4 @@
 import 'react-native-url-polyfill/auto';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
 
 // Same Supabase project the Swift app uses (see ios-miyar/MIYAR/SupabaseConfig.swift)
@@ -9,42 +8,31 @@ import { createClient } from '@supabase/supabase-js';
 const SUPABASE_URL = 'https://wqiqyhrqsazarslozlgr.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_0F2tHsFhIxqDd9VVu6syxw_vssDX6kk';
 
-// AsyncStorage's native module isn't reachable in every Expo Go environment
-// (it depends on exactly which build the Expo Go client shipped with). When
-// it isn't, every call rejects, and supabase-js's background token-refresh
-// timer turns that rejection into a recurring red error screen — even
-// though sign-in/out still works. Falling back to an in-memory store keeps
-// auth working everywhere; it just means the session won't survive an app
-// restart on devices where the native module is unavailable.
+// Plain in-memory session store — no native module involved at all. Some
+// Expo Go builds can't reach @react-native-async-storage/async-storage's
+// native side (its calls come back "Native module is null"), which made
+// supabase-js's background token-refresh timer spam an uncaught-rejection
+// red screen even though sign-in still worked underneath it. Trading
+// cross-restart session persistence for zero native dependency removes
+// that failure mode entirely; a real device/dev-client build can swap
+// this back for AsyncStorage or expo-secure-store later.
 const memoryStore = new Map<string, string>();
 
-const resilientStorage = {
+const memoryStorage = {
   async getItem(key: string): Promise<string | null> {
-    try {
-      return await AsyncStorage.getItem(key);
-    } catch {
-      return memoryStore.get(key) ?? null;
-    }
+    return memoryStore.get(key) ?? null;
   },
   async setItem(key: string, value: string): Promise<void> {
-    try {
-      await AsyncStorage.setItem(key, value);
-    } catch {
-      memoryStore.set(key, value);
-    }
+    memoryStore.set(key, value);
   },
   async removeItem(key: string): Promise<void> {
-    try {
-      await AsyncStorage.removeItem(key);
-    } catch {
-      memoryStore.delete(key);
-    }
+    memoryStore.delete(key);
   },
 };
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
-    storage: resilientStorage,
+    storage: memoryStorage,
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,

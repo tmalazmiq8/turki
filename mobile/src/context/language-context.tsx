@@ -1,9 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 import type { Language } from '@/lib/strings';
 
-const STORAGE_KEY = 'miyar.language';
-
+// No persistence across app restarts on purpose — see the comment in
+// lib/supabase.ts. The language choice just lives for the current session.
 interface LanguageContextValue {
   language: Language;
   isRTL: boolean;
@@ -14,26 +13,13 @@ interface LanguageContextValue {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('ar');
-
-  useEffect(() => {
-    AsyncStorage.getItem(STORAGE_KEY)
-      .then((stored) => {
-        if (stored === 'ar' || stored === 'en') setLanguageState(stored);
-      })
-      .catch(() => {});
-  }, []);
-
-  const setLanguage = (next: Language) => {
-    setLanguageState(next);
-    AsyncStorage.setItem(STORAGE_KEY, next).catch(() => {});
-  };
+  const [language, setLanguage] = useState<Language>('ar');
 
   const value = useMemo<LanguageContextValue>(
     () => ({
       language,
       isRTL: language === 'ar',
-      toggleLanguage: () => setLanguage(language === 'ar' ? 'en' : 'ar'),
+      toggleLanguage: () => setLanguage((current) => (current === 'ar' ? 'en' : 'ar')),
       setLanguage,
     }),
     [language],
