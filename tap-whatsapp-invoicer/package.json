@@ -1,0 +1,15 @@
+{
+  "name": "tap-whatsapp-invoicer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "أداة مستقلة لإنشاء فواتير عبر Tap Payments وإرسالها للعملاء عبر واتساب.",
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "scripts": {
+    "send": "node --env-file=.env src/sendInvoice.js",
+    "send:bulk": "node --env-file=.env src/sendBulk.js",
+    "status": "node --env-file=.env src/checkStatus.js"
+  }
+}
