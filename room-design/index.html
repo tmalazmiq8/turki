@@ -90,7 +90,7 @@ dd{margin:0;font-variant-numeric:tabular-nums}
     <section>
       <h2>القطع</h2>
       <dl>
-        <dt>السرير</dt><dd>١٢٠ × ٢٠٠، الرأس على الجدار المقابل للباب</dd>
+        <dt>السرير</dt><dd>١٢٠ × ٢٠٠، الرأس على الجدار المقابل للباب، مُزاح نحو كبت الملابس</dd>
         <dt>التلفزيون</dt><dd>٥٥ بوصة (١٢٢ × ٦٩) معلّق على جدار الباب بمحور السرير، ورف عائم ١٣٠ × ٣٢</dd>
         <dt>طاولة العطور</dt><dd>بنفس تصميم المرجع على هيئة L: كل ضلع ١٠٠ شاملًا الركن، عمق ٥٠، سطح رخام أبيض على ارتفاع ٧٦، قاعدتان بدرج وبابين عند الطرفين وفراغ للأرجل في الركن، أربع درجات خشبية متدرجة (عمق ٦ × ارتفاع ١١ لكل درجة) مستمرة على الجدارين مع إضاءة LED، ولوح خلفي خشبي بارتفاع ٥٦</dd>
         <dt>كبت العطور</dt><dd>٥٠ عرض × ٣٥ عمق × ٢٠٠ ارتفاع، خمسة أرفف بإضاءة LED وباب زجاجي، بنفس خامات الطاولة، يمينها مباشرة</dd>
@@ -98,7 +98,7 @@ dd{margin:0;font-variant-numeric:tabular-nums}
         <dt>النافذة والمكيف</dt><dd>نافذة ٨٠ × ١١٠ بمنتصف الجدار الأيمن، والمكيف ٨٠ فوقها مباشرة</dd>
         <dt>مكتب الكمبيوتر</dt><dd>١٦٠ × ٦٥، شاشتان ٢٧ بوصة، كرسي مريح</dd>
         <dt>كبت الملابس</dt><dd>٢٠٠ × ٦٠ × ٢٤٠، بابان سحاب</dd>
-        <dt>زاوية التصوير</dt><dd>مسار سقفي ١٦٠ أمام الباب، ستارة سادة تُجمع خلف الباب، حامل جوال وإضاءة قابلان للطي</dd>
+        <dt>زاوية التصوير</dt><dd>مسار سقفي ١٥٠ أمام الباب، ستارة سادة تُجمع خلف الباب، حامل جوال وإضاءة قابلان للطي</dd>
       </dl>
     </section>
 
@@ -106,8 +106,8 @@ dd{margin:0;font-variant-numeric:tabular-nums}
       <h2>الممرات والخلوصات</h2>
       <ul class="checks">
         <li>قوس فتح الباب (٩٠ × ٩٠) خالٍ تمامًا من الأثاث.</li>
-        <li>بين كبت الملابس وجانب السرير الأيسر ١٠٣ سم.</li>
-        <li>بين جانب السرير الأيمن وكونر القهوة ٧٥ سم.</li>
+        <li>السرير مُبعَد عن ركن العطور والمكتب: ٤١ سم بينه وبين طاولة العطور، وممر ١٠٣ سم إلى كونر القهوة والمكتب.</li>
+        <li>بين كبت الملابس وجانب السرير الأيسر ٧٥ سم، مع رف معلّق بدل الكومودينا حتى تبقى واجهة الكبت حرة.</li>
         <li>من قدم السرير إلى رف التلفزيون ١٥٨ سم فارغة، ومن العين إلى الشاشة نحو ٣٫٢ م.</li>
         <li>كرسي المكتب خارج خط النظر بين السرير والشاشة.</li>
         <li>مساحة جلوس داخل زاوية الـL للعطور ٥٠ × ٥٠ مع كرسي صغير، والأرجل تدخل تحت الركن.</li>
@@ -236,10 +236,10 @@ function wallGroup(test){ const g = new THREE.Group(); scene.add(g); walls.push(
 const wN = wallGroup(p => p.z < 0);
 box(-T,0,-T, W+2*T,H,T, MAT.wall, wN);
 const wS = wallGroup(p => p.z > W);
-box(-T,0,W, 50+T,H,T, MAT.wall, wS);                 // west of door
-box(140,0,W, W-140+T,H,T, MAT.wall, wS);             // east of door
-box(50,210,W, 90,H-210,T, MAT.wall, wS);             // over door
-box(46,0,W-1, 4,214,T+2, MAT.white, wS); box(140,0,W-1, 4,214,T+2, MAT.white, wS); box(46,210,W-1, 98,4,T+2, MAT.white, wS);
+box(-T,0,W, 40+T,H,T, MAT.wall, wS);                 // west of door
+box(130,0,W, W-130+T,H,T, MAT.wall, wS);             // east of door
+box(40,210,W, 90,H-210,T, MAT.wall, wS);             // over door
+box(36,0,W-1, 4,214,T+2, MAT.white, wS); box(130,0,W-1, 4,214,T+2, MAT.white, wS); box(36,210,W-1, 98,4,T+2, MAT.white, wS);
 const wW = wallGroup(p => p.x < 0);
 box(-T,0,0, T,H,W, MAT.wall, wW);
 const wE = wallGroup(p => p.x > W);
@@ -258,7 +258,7 @@ box(W-1,104,156, 4,2.5,88, MAT.white, wE);            // inner sill
 box(W-3,180,161, 1,33,78, MAT.cream, wE); box(W-4,212,159, 4,4,82, MAT.white, wE);
 
 /* skirting */
-[[0,0,W,1,'x'],[0,W-1,50,1,'x'],[144,W-1,W-144,1,'x']].forEach(s=>box(s[0],0,s[1],s[2],8,s[3],MAT.cream));
+[[0,0,W,1,'x'],[0,W-1,36,1,'x'],[134,W-1,W-134,1,'x']].forEach(s=>box(s[0],0,s[1],s[2],8,s[3],MAT.cream));
 box(0,0,0,1,8,W,MAT.cream); box(W-1,0,0,1,8,160,MAT.cream); box(W-1,0,240,1,8,160,MAT.cream);
 
 /* ---------- AC: directly above the window, 80 wide ---------- */
@@ -279,35 +279,34 @@ box(56,240,0, 4,1,200, MAT.wood);
 label('<b>كبت الملابس</b> ٢٠٠×٦٠ · سحاب', 30,262,100);
 
 /* ---------- Bed 120 × 200, headboard on north wall ---------- */
-box(158,0,0, 134,112,8, MAT.sand);
-for(let i=0;i<7;i++) box(160+i*18.6,14,7.6, 17.6,94,2, MAT.beige);
-box(163,14,8, 124,18,202, MAT.wood);
-[[166,12],[280,12],[166,203],[280,203]].forEach(p=>box(p[0],0,p[1],5,14,5,MAT.woodDark));
-box(165,32,10, 120,20,198, MAT.linen);
-box(163.5,40,72, 123,14,136, MAT.cream);        // duvet
-box(162.5,22,72, 1,26,136, MAT.cream); box(286.5,22,72, 1,26,136, MAT.cream); box(163,22,207.5, 124,26,1,MAT.cream);
-box(163.2,54,168, 123.6,3,40, MAT.taupe);        // throw at the foot
-box(171,52,16, 50,13,34, MAT.linen); box(229,52,16, 50,13,34, MAT.linen);
-box(185,52,44, 80,9,26, MAT.sand);
-label('<b>السرير</b> ١٢٠×٢٠٠', 225,82,120);
+box(130,0,0, 134,112,8, MAT.sand);
+for(let i=0;i<7;i++) box(132+i*18.6,14,7.6, 17.6,94,2, MAT.beige);
+box(135,14,8, 124,18,202, MAT.wood);
+[[138,12],[252,12],[138,203],[252,203]].forEach(p=>box(p[0],0,p[1],5,14,5,MAT.woodDark));
+box(137,32,10, 120,20,198, MAT.linen);
+box(135.5,40,72, 123,14,136, MAT.cream);        // duvet
+box(134.5,22,72, 1,26,136, MAT.cream); box(258.5,22,72, 1,26,136, MAT.cream); box(135,22,207.5, 124,26,1,MAT.cream);
+box(135.2,54,168, 123.6,3,40, MAT.taupe);        // throw at the foot
+box(143,52,16, 50,13,34, MAT.linen); box(201,52,16, 50,13,34, MAT.linen);
+box(157,52,44, 80,9,26, MAT.sand);
+label('<b>السرير</b> ١٢٠×٢٠٠', 197,82,120);
 
 /* nightstand + lamp */
-box(116,8,6, 42,40,38, MAT.wood);
-box(116,0,8, 3,8,3, MAT.woodDark); box(155,0,8, 3,8,3, MAT.woodDark); box(116,0,41, 3,8,3, MAT.woodDark); box(155,0,41, 3,8,3, MAT.woodDark);
-box(117,22,43.6, 40,1,1, MAT.woodDark);
-cyl(137,48,22, 6,18, MAT.cream); cyl(137,66,22, 13,18, std('#f6ead6',0.9,{emissive:'#ffdcae',emissiveIntensity:0.35}),null,32,9);
-const lampLight = new THREE.PointLight('#ffd9a8', 0.25, 260, 2); lampLight.position.set(137,80,30); scene.add(lampLight);
+box(94,30,0, 34,22,32, MAT.wood);
+box(95,40,31.6, 32,1,1, MAT.woodDark);
+cyl(111,52,16, 6,18, MAT.cream); cyl(111,70,16, 13,18, std('#f6ead6',0.9,{emissive:'#ffdcae',emissiveIntensity:0.35}),null,32,9);
+const lampLight = new THREE.PointLight('#ffd9a8', 0.25, 260, 2); lampLight.position.set(111,84,24); scene.add(lampLight);
 
 /* rug */
-box(140,0,150, 170,0.8,175, std('#e4d4bd',0.98));
-box(147,0.85,157, 156,0.2,161, std('#d4bea0',0.98));
+box(112,0,150, 170,0.8,175, std('#e4d4bd',0.98));
+box(119,0.85,157, 156,0.2,161, std('#d4bea0',0.98));
 
 /* ---------- TV 55" opposite the foot of the bed, on the door wall, centred on the bed ---------- */
-box(164,92,395.5, 122,69,3, MAT.black);
-box(165.5,93.5,395, 119,66,0.6, MAT.screen);
-box(160,28,368, 130,16,32, MAT.wood);
-box(162,28,367.5, 126,16,0.6, MAT.woodDark);
-label('<b>تلفزيون ٥٥</b> مقابل قدم السرير', 225,176,396);
+box(136,92,395.5, 122,69,3, MAT.black);
+box(137.5,93.5,395, 119,66,0.6, MAT.screen);
+box(140,28,368, 114,16,32, MAT.wood);
+box(142,28,367.5, 110,16,0.6, MAT.woodDark);
+label('<b>تلفزيون ٥٥</b> مقابل قدم السرير', 197,176,396);
 
 function arc(cx,cy,r,t0,t1,n){ const p=[]; for(let i=0;i<=n;i++){ const t=t0+(t1-t0)*i/n; p.push([cx+r*Math.cos(t), cy+r*Math.sin(t)]); } return p; }
 /* ---------- Perfume bar (from the reference photo), L-shaped in the NE corner: 100 + 100 incl. corner ----------
@@ -453,26 +452,26 @@ label('<b>مكتب الكمبيوتر</b> ١٦٠×٦٥', 368,150,320);
 })();
 
 /* ---------- Door (90 opening on the south wall, hinge on the west side) ---------- */
-const doorPivot = new THREE.Group(); doorPivot.position.set(51, 0, W+2); scene.add(doorPivot);
+const doorPivot = new THREE.Group(); doorPivot.position.set(41, 0, W+2); scene.add(doorPivot);
 box(0,0,-2, 87,208,4, MAT.cream, doorPivot);
 box(5,6,2.1, 77,1,0.4, MAT.beige, doorPivot); box(5,200,2.1, 77,1,0.4, MAT.beige, doorPivot);
 box(76,98,-6, 3,2,12, MAT.brass, doorPivot);
 const doorArc = new THREE.Line(
-  new THREE.BufferGeometry().setFromPoints(arc(51, W, 87, 0, -Math.PI/2, 30).map(p=>new THREE.Vector3(p[0],0.6,p[1])).concat([new THREE.Vector3(51,0.6,W)])),
+  new THREE.BufferGeometry().setFromPoints(arc(41, W, 87, 0, -Math.PI/2, 30).map(p=>new THREE.Vector3(p[0],0.6,p[1])).concat([new THREE.Vector3(41,0.6,W)])),
   new THREE.LineDashedMaterial({color:'#9b7a55', dashSize:4, gapSize:3}));
 doorArc.computeLineDistances(); scene.add(doorArc);
-label('<b>الباب</b> ٩٠ سم', 95,226,W+6);
+label('<b>الباب</b> ٩٠ سم', 85,226,W+6);
 
 /* ---------- Photo corner: ceiling track + plain curtain, foldable phone stand and light ---------- */
-box(2,265,383, 162,3,4, MAT.steel);
+box(2,265,383, 150,3,4, MAT.steel);
 function curtainGeo(width, folds, amp){
   const g = new THREE.PlaneGeometry(width, 260, folds*6, 1);
   const p = g.attributes.position;
   for(let i=0;i<p.count;i++){ const x = p.getX(i); p.setZ(i, Math.sin((x/width)*folds*Math.PI*2)*amp); }
   g.computeVertexNormals(); return g;
 }
-const curtainOpen = new THREE.Mesh(curtainGeo(158, 16, 3), MAT.curtain);
-curtainOpen.position.set(2+79, 4+130, 385); add(curtainOpen);
+const curtainOpen = new THREE.Mesh(curtainGeo(148, 15, 3), MAT.curtain);
+curtainOpen.position.set(2+74, 4+130, 385); add(curtainOpen);
 const curtainStack = new THREE.Mesh(curtainGeo(26, 7, 5.5), MAT.curtain);
 curtainStack.position.set(3+13, 4+130, 385); add(curtainStack);
 
@@ -494,23 +493,23 @@ function buildStands(){
   if(photoMode){
     tripod(phoneStand, 150, 50);
     box(-0.5,140,-4, 1,16,8, MAT.black, phoneStand); box(-0.9,148,-3.6, 0.4,8,7.2, MAT.screen2, phoneStand);
-    phoneStand.position.set(95,0,228); phoneStand.rotation.y = Math.PI/2;
+    phoneStand.position.set(85,0,228); phoneStand.rotation.y = Math.PI/2;
     tripod(lightStand, 175, 60);
     const panel = new THREE.Group(); lightStand.add(panel);
     box(-22,-15,-2, 44,30,3, MAT.black, panel); box(-20,-13,1.1, 40,26,0.4, std('#fff7ea',0.4,{emissive:'#fff1d9',emissiveIntensity:1.2}), panel);
     panel.position.y = 172; panel.rotation.x = 0.12;
-    lightStand.position.set(165,0,282); lightStand.rotation.y = -0.83;
+    lightStand.position.set(22,0,282); lightStand.rotation.y = 0.785;
   } else {
     // folded and leaning in the pocket behind the open door
     const a = new THREE.Mesh(new THREE.CylinderGeometry(2.2,2.2,72,10), MAT.black); a.position.set(0,36,0); a.rotation.x = -0.12; add(a, phoneStand);
     phoneStand.position.set(14,0,348); phoneStand.rotation.y = 0;
     const b = new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,96,10), MAT.black); b.position.set(0,48,0); b.rotation.x = -0.1; add(b, lightStand);
     box(-22,0,-3, 44,30,3, MAT.black, lightStand); lightStand.children[1].position.set(0,15,-6);
-    lightStand.position.set(26,0,330); lightStand.rotation.y = 0;
+    lightStand.position.set(22,0,330); lightStand.rotation.y = Math.PI/2;
   }
 }
 const photoLight = new THREE.SpotLight('#fff3e0', 0, 400, 0.7, 0.6, 1.5);
-photoLight.position.set(160,172,285); photoLight.target.position.set(80,140,370); scene.add(photoLight, photoLight.target);
+photoLight.position.set(22,172,285); photoLight.target.position.set(85,140,370); scene.add(photoLight, photoLight.target);
 const photoLbl = label('<b>زاوية التصوير</b> ستارة على مسار سقفي', 70,200,340);
 
 function setMode(photo){
@@ -540,7 +539,7 @@ const VIEWS = {
   iso:  {p:[-250, 540, 720], t:[205, 40, 215]},
   door: {p:[210, 560, -190], t:[160, 30, 300]},
   top:  {p:[200, 980, 201], t:[200, 0, 200]},
-  bed:  {p:[225, 92, 52],  t:[225, 118, 400]},
+  bed:  {p:[197, 92, 52],  t:[197, 118, 400]},
   perf: {p:[205, 175, 225], t:[362, 92, 45]},
 };
 let anim = null;
@@ -593,34 +592,35 @@ function drawPlan(){
   let o = '';
   o += `<rect x="-12" y="-12" width="424" height="424" fill="${ink}"/>`;
   o += `<rect x="0" y="0" width="400" height="400" fill="${bg}"/>`;
-  o += `<rect x="50" y="398" width="90" height="16" fill="${bg}"/>`;
+  o += `<rect x="40" y="398" width="90" height="16" fill="${bg}"/>`;
   o += `<rect x="398" y="160" width="16" height="80" fill="${bg}"/><line x1="406" y1="160" x2="406" y2="240" stroke="${ink}" stroke-width="1.2"/><line x1="401" y1="160" x2="401" y2="240" stroke="${ink}" stroke-width="0.8"/>`;
   // TV sight corridor
-  o += `<rect x="165" y="210" width="120" height="158" fill="${zone}" fill-opacity=".28" stroke="${acc}" stroke-dasharray="4 3" stroke-width="1"/>`;
-  o += Tx(225, 300, 'خط مشاهدة خالٍ', 9, 'middle', 0, muted);
+  o += `<rect x="137" y="210" width="120" height="158" fill="${zone}" fill-opacity=".28" stroke="${acc}" stroke-dasharray="4 3" stroke-width="1"/>`;
+  o += Tx(197, 300, 'خط مشاهدة خالٍ', 9, 'middle', 0, muted);
   // photo zone
-  o += `<rect x="2" y="300" width="160" height="98" fill="${zone}" fill-opacity=".35" stroke="none"/>`;
-  o += `<line x1="2" y1="385" x2="164" y2="385" stroke="${acc}" stroke-width="1.6" stroke-dasharray="${photoMode?'0':'5 3'}"/>`;
+  o += `<rect x="2" y="300" width="150" height="98" fill="${zone}" fill-opacity=".35" stroke="none"/>`;
+  o += `<line x1="2" y1="385" x2="152" y2="385" stroke="${acc}" stroke-width="1.6" stroke-dasharray="${photoMode?'0':'5 3'}"/>`;
   o += photoMode ? '' : `<rect x="3" y="381" width="26" height="8" fill="${wood}" stroke="${acc}" stroke-width="1"/>`;
-  o += Tx(108, 318, 'زاوية التصوير', 10);
-  o += Tx(108, 331, photoMode ? 'الستارة مسحوبة' : 'الستارة مجموعة خلف الباب', 8.5, 'middle', 0, muted);
-  if(photoMode){ o += `<circle cx="95" cy="228" r="9" fill="none" stroke="${acc}" stroke-width="1.2"/>` + Tx(95,214,'حامل الجوال',8,'middle',0,muted);
-                 o += `<circle cx="165" cy="282" r="9" fill="none" stroke="${acc}" stroke-width="1.2"/>` + Tx(165,268,'الإضاءة',8,'middle',0,muted); }
-  else { o += `<circle cx="14" cy="348" r="3" fill="${ink}"/><circle cx="26" cy="330" r="3.5" fill="${ink}"/>`; }
+  o += Tx(96, 318, 'زاوية التصوير', 10);
+  o += Tx(96, 331, photoMode ? 'الستارة مسحوبة' : 'الستارة مجموعة خلف الباب', 8.5, 'middle', 0, muted);
+  if(photoMode){ o += `<circle cx="85" cy="228" r="9" fill="none" stroke="${acc}" stroke-width="1.2"/>` + Tx(85,214,'حامل الجوال',8,'middle',0,muted);
+                 o += `<circle cx="22" cy="282" r="9" fill="none" stroke="${acc}" stroke-width="1.2"/>` + Tx(30,268,'الإضاءة',8,'middle',0,muted); }
+  else { o += `<circle cx="14" cy="348" r="3" fill="${ink}"/><circle cx="22" cy="330" r="3.5" fill="${ink}"/>`; }
   // door
-  if(photoMode) o += `<line x1="51" y1="401" x2="138" y2="401" stroke="${ink}" stroke-width="3"/>`;
-  else o += `<line x1="51" y1="400" x2="51" y2="313" stroke="${ink}" stroke-width="3"/>`;
-  o += `<path d="M138 400 A87 87 0 0 0 51 313" fill="none" stroke="${muted}" stroke-dasharray="3 3"/>`;
-  o += Tx(95, 428, 'الدخول', 10, 'middle', 0, acc);
+  if(photoMode) o += `<line x1="41" y1="401" x2="128" y2="401" stroke="${ink}" stroke-width="3"/>`;
+  else o += `<line x1="41" y1="400" x2="41" y2="313" stroke="${ink}" stroke-width="3"/>`;
+  o += `<path d="M128 400 A87 87 0 0 0 41 313" fill="none" stroke="${muted}" stroke-dasharray="3 3"/>`;
+  o += Tx(85, 428, 'الدخول', 10, 'middle', 0, acc);
   // wardrobe
   o += R(0,0,60,200,wood) + `<line x1="57" y1="0" x2="57" y2="101" stroke="${ink}" stroke-width="1"/><line x1="54" y1="99" x2="54" y2="200" stroke="${ink}" stroke-width="1"/>`;
   o += Tx(32, 100, 'كبت الملابس ٢٠٠×٦٠', 10, 'middle', -90);
   // bed
-  o += R(158,0,134,8,wood) + R(163,8,124,202,wood) + R(171,16,50,34,bg) + R(229,16,50,34,bg);
-  o += Tx(225, 120, 'سرير', 11) + Tx(225, 135, '١٢٠×٢٠٠', 10);
-  o += R(116,6,42,38,wood) + Tx(137,58,'كومودينا',8,'middle',0,muted);
+  o += R(130,0,134,8,wood) + R(135,8,124,202,wood) + R(143,16,50,34,bg) + R(201,16,50,34,bg);
+  o += Tx(197, 120, 'سرير', 11) + Tx(197, 135, '١٢٠×٢٠٠', 10);
+  o += R(94,0,34,32,wood) + Tx(111,44,'رف معلّق',8,'middle',0,muted);
+  o += Tx(279, 150, '٤١ سم', 9, 'middle', 0, acc) + Tx(98, 150, '٧٥ سم', 9, 'middle', 0, acc);
   // tv
-  o += R(160,368,130,32,wood) + `<rect x="164" y="395" width="122" height="4" fill="${ink}"/>` + Tx(225, 388, 'تلفزيون ٥٥″', 10);
+  o += R(140,368,114,32,wood) + `<rect x="136" y="395" width="122" height="4" fill="${ink}"/>` + Tx(197, 388, 'تلفزيون ٥٥″', 10);
   // perfume L
   o += `<polygon points="${lp}" fill="${wood}" stroke="${ink}" stroke-width="1.2"/>`;
   tiers.forEach(t => o += `<polyline points="300,${t.d} ${400-t.d},${t.d} ${400-t.d},100" fill="none" stroke="${acc}" stroke-width=".8"/>`);
