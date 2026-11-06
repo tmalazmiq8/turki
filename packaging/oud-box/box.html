@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Oud Box</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@500;600&display=block" rel="stylesheet">
+<style>
+  html,body{margin:0;background:#efe9df}
+  body.dieline{background:#fff}
+  #dieline{display:none}
+  body.dieline #dieline{display:block}
+  body.dieline #mock{display:none}
+  #mock{width:1400px;height:900px;display:flex;align-items:center;justify-content:center;gap:120px;
+        background:radial-gradient(ellipse at 50% 40%,#f7f2ea,#d9cfc0);font-family:Amiri}
+  .scene{perspective:2200px}
+  .box{position:relative;width:160px;height:400px;transform-style:preserve-3d}
+  .box svg{position:absolute;display:block;backface-visibility:hidden}
+  .f{width:160px;height:400px;transform:translateZ(80px)}
+  .r{width:160px;height:400px;transform:rotateY(90deg) translateZ(80px);filter:brightness(.72)}
+  .l{width:160px;height:400px;transform:rotateY(-90deg) translateZ(80px);filter:brightness(.72)}
+  .t{width:160px;height:160px;top:120px;transform:rotateX(90deg) translateZ(200px);filter:brightness(1.12)}
+  .shadow{position:absolute;width:260px;height:70px;left:-50px;top:400px;background:radial-gradient(ellipse,rgba(0,0,0,.35),transparent 70%);transform:translateY(-20px)}
+  .cap{font-size:20px;color:#3a2a1c;text-align:center;margin-top:40px;font-family:'Cormorant Garamond'}
+</style>
+</head>
+<body>
+<svg id="dieline" xmlns="http://www.w3.org/2000/svg" width="182mm" height="220mm" viewBox="-5 -5 182 220"></svg>
+
+<div id="mock">
+  <div>
+    <div class="scene"><div class="box" style="transform:rotateX(-16deg) rotateY(-32deg)">
+      <div class="shadow"></div>
+      <svg class="f" viewBox="80 55 40 100"><use href="#art"/></svg>
+      <svg class="r" viewBox="120 55 40 100"><use href="#art"/></svg>
+      <svg class="t" viewBox="0 15 40 40"><g transform="rotate(180 20 35)"><use href="#art"/></g></svg>
+    </div></div>
+    <div class="cap">Front · Side</div>
+  </div>
+  <div>
+    <div class="scene"><div class="box" style="transform:rotateX(-16deg) rotateY(-32deg)">
+      <div class="shadow"></div>
+      <svg class="f" viewBox="0 55 40 100"><use href="#art"/></svg>
+      <svg class="r" viewBox="40 55 40 100"><use href="#art"/></svg>
+      <svg class="t" viewBox="80 155 40 40"><use href="#art"/></svg>
+    </div></div>
+    <div class="cap">Back · Side</div>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute">
+<defs>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.015 0.55" numOctaves="3" seed="7"/>
+    <feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.36  0 0 0 0 0.2  0 0 0 1.4 -0.55"/>
+  </filter>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f1d58e"/><stop offset=".45" stop-color="#c39a4b"/>
+    <stop offset=".7" stop-color="#e8c97c"/><stop offset="1" stop-color="#9c7432"/>
+  </linearGradient>
+  <g id="art"></g>
+</defs>
+</svg>
+
+<script>
+// ---- Geometry (mm). Inner box 40 x 40 x 100 for bottle 37 x ~37 x 95 ----
+const W=40,D=40,H=100,T=15,G=12,Y0=55,Y1=Y0+H;
+const gold='url(#gold)', ink='#1c120b';
+// cut outline
+const cut=`M0 ${Y0} L0 ${T+4} Q0 0 ${T} 0 L${W-T} 0 Q${W} 0 ${W} ${T+4} L${W} ${Y0}
+ L${W+2} ${Y0-16} L${W+D-6} ${Y0-18} L${W+D} ${Y0}
+ L${2*W+D} ${Y0} L${2*W+D+2} ${Y0-16} L${2*W+2*D-6} ${Y0-18} L${2*W+2*D} ${Y0}
+ L${2*W+2*D+G} ${Y0+6} L${2*W+2*D+G} ${Y1-6} L${2*W+2*D} ${Y1}
+ L${2*W+2*D-2} ${Y1+16} L${W+2*D+6} ${Y1+18} L${W+2*D} ${Y1}
+ L${W+2*D} ${Y1+D-T-4} Q${W+2*D} ${Y1+D+T} ${W+2*D-T} ${Y1+D+T} L${W+D+T} ${Y1+D+T} Q${W+D} ${Y1+D+T} ${W+D} ${Y1+D-T-4}
+ L${W+D} ${Y1} L${W+D-2} ${Y1+16} L${W+6} ${Y1+18} L${W} ${Y1} L0 ${Y1} Z`;
+// folds
+const folds=[[W,Y0,W,Y1],[W+D,Y0,W+D,Y1],[2*W+D,Y0,2*W+D,Y1],[2*W+2*D,Y0,2*W+2*D,Y1],
+ [0,Y0,W,Y0],[W,Y0,W+D,Y0],[2*W+D,Y0,2*W+2*D,Y0],[0,Y0-D,W,Y0-D],
+ [W,Y1,W+D,Y1],[W+D,Y1,2*W+D,Y1],[2*W+D,Y1,2*W+2*D,Y1],[W+D,Y1+D,2*W+D,Y1+D]];
+
+const t=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" font-size="${s}" text-anchor="${o.a||'middle'}" fill="${o.f||gold}"
+ font-family="${o.ff||'Amiri'}" ${o.w?`font-weight="${o.w}"`:''} ${o.ls?`letter-spacing="${o.ls}"`:''} ${o.tr?`transform="${o.tr}"`:''} direction="${o.dir||'rtl'}">${txt}</text>`;
+const en=(x,y,s,txt,ls=1,o={})=>t(x,y,s,txt,{ff:'Cormorant Garamond',w:600,ls,dir:'ltr',...o});
+const star=(cx,cy,r)=>{let p='';for(let i=0;i<16;i++){const a=i*Math.PI/8,rr=i%2?r*.42:r;p+=(i?'L':'M')+(cx+rr*Math.sin(a)).toFixed(2)+' '+(cy-rr*Math.cos(a)).toFixed(2)}return `<path d="${p}Z" fill="${gold}"/>`};
+const rule=(x1,x2,y)=>`<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${gold}" stroke-width=".25"/>`;
+
+// FRONT (x 80..120)
+const fx=2*W+D-W/2+0, FX=W+D+W/2; // centre of front = 100
+const front=`
+ <rect x="${W+D+2.5}" y="${Y0+2.5}" width="${W-5}" height="${H-5}" fill="none" stroke="${gold}" stroke-width=".35"/>
+ <rect x="${W+D+3.5}" y="${Y0+3.5}" width="${W-7}" height="${H-7}" fill="none" stroke="${gold}" stroke-width=".15"/>
+ <path d="M${FX-13} ${Y0+80} L${FX-13} ${Y0+32} Q${FX-13} ${Y0+17} ${FX} ${Y0+12} Q${FX+13} ${Y0+17} ${FX+13} ${Y0+32} L${FX+13} ${Y0+80} Z" fill="none" stroke="${gold}" stroke-width=".45"/>
+ <path d="M${FX-11.5} ${Y0+78.5} L${FX-11.5} ${Y0+32.5} Q${FX-11.5} ${Y0+19} ${FX} ${Y0+14.2} Q${FX+11.5} ${Y0+19} ${FX+11.5} ${Y0+32.5} L${FX+11.5} ${Y0+78.5} Z" fill="none" stroke="${gold}" stroke-width=".15"/>
+ ${star(FX,Y0+24,2.2)}
+ ${t(FX,Y0+52,17,'عُود',{ff:'Aref Ruqaa',w:700})}
+ ${rule(FX-7,FX+7,Y0+60)}
+ ${en(FX,Y0+66,3.4,'OUD',1.6)}
+ ${t(FX,Y0+73,2.6,'عود طبيعي · عنبر · ورد')}
+ ${en(FX,Y0+87.5,2.1,'EAU DE PARFUM',.5)}
+ ${en(FX,Y0+92,1.9,'30 ml · 1.0 fl.oz',.3)}`;
+
+// BACK (x 0..40)
+const BX=W/2;
+const bar=(y,label,len,en_)=>`${t(36,y,2.5,label,{a:'start'})}
+ <rect x="${36-len}" y="${y+1.2}" width="${len}" height="1" fill="${gold}"/><rect x="4" y="${y+1.2}" width="32" height="1" fill="none" stroke="${gold}" stroke-width=".12"/>
+ ${en(4,y,1.8,en_,.3,{a:'start'})}`;
+const back=`
+ <rect x="2.5" y="${Y0+2.5}" width="${W-5}" height="${H-5}" fill="none" stroke="${gold}" stroke-width=".35"/>
+ ${star(BX,Y0+9,1.5)}
+ ${t(BX,Y0+17,4.2,'عُود',{ff:'Aref Ruqaa',w:700})}
+ ${t(BX,Y0+24,2.15,'عطرٌ يتصدّره العود الطبيعي،',{f:'#e6d3a8'})}
+ ${t(BX,Y0+27.4,2.15,'يدفئه العنبر، وتلطّفه باقة',{f:'#e6d3a8'})}
+ ${t(BX,Y0+30.8,2.15,'من الورود الطبيعية.',{f:'#e6d3a8'})}
+ ${rule(8,32,Y0+35)}
+ ${t(BX,Y0+40.5,2.3,'الهرم العطري',{w:700})}
+ ${bar(Y0+46,'عود طبيعي',30,'NATURAL OUD')}
+ ${bar(Y0+53,'عنبر',14,'AMBER')}
+ ${bar(Y0+60,'ورود طبيعية',11,'NATURAL ROSES')}
+ ${rule(8,32,Y0+67)}
+ ${en(BX,Y0+70.5,1.5,'INGREDIENTS: ALCOHOL DENAT.,',.05,{f:'#cdb88a'})}${en(BX,Y0+72.6,1.5,'PARFUM (FRAGRANCE), AQUA.',.05,{f:'#cdb88a'})}
+ ${t(BX,Y0+75.2,1.5,'للاستخدام الخارجي فقط · يُحفظ بعيداً عن الحرارة',{f:'#cdb88a'})}
+ <rect x="9" y="${Y0+77.5}" width="22" height="11.5" fill="#fff"/>
+ ${t(BX,Y0+84,1.8,'مكان الباركود',{f:'#888'})}
+ ${en(BX,Y0+93,1.7,'BATCH ____   ·   MADE IN ____',.2,{f:'#cdb88a'})}`;
+
+// SIDES
+const side1 = `${t(0,0,6.2,'عود · عنبر · ورد',{ff:'Aref Ruqaa',w:700,tr:`translate(${W+D/2+2} ${Y0+H/2}) rotate(-90)`})}
+ ${star(W+D/2,Y0+12,1.6)}${star(W+D/2,Y0+H-12,1.6)}
+ <line x1="${W+D/2}" y1="${Y0+16}" x2="${W+D/2}" y2="${Y0+22}" stroke="${gold}" stroke-width=".25"/>
+ <line x1="${W+D/2}" y1="${Y0+H-22}" x2="${W+D/2}" y2="${Y0+H-16}" stroke="${gold}" stroke-width=".25"/>`;
+const SX=2*W+D+D/2;
+const side2 = `${en(0,0,4.2,'OUD · AMBER · ROSE',1,{tr:`translate(${SX+1.4} ${Y0+H/2}) rotate(-90)`})}
+ ${en(0,0,1.9,'EAU DE PARFUM · 30 ml',.6,{f:'#cdb88a',tr:`translate(${SX+6.5} ${Y0+H/2}) rotate(-90)`})}
+ ${star(SX,Y0+12,1.6)}${star(SX,Y0+H-12,1.6)}`;
+
+// TOP LID (on back, x 0..40, y 15..55) — art rotated 180° so it reads from the front
+const lid = `<g transform="rotate(180 ${W/2} ${Y0-D/2})">
+ <circle cx="${W/2}" cy="${Y0-D/2}" r="11" fill="none" stroke="${gold}" stroke-width=".4"/>
+ <circle cx="${W/2}" cy="${Y0-D/2}" r="9.8" fill="none" stroke="${gold}" stroke-width=".15"/>
+ ${t(W/2,Y0-D/2+4.2,12,'ع',{ff:'Aref Ruqaa',w:700})}</g>`;
+// BOTTOM LID (on front, x 80..120, y 155..195)
+const blid = `${t(FX,Y1+15,2.2,'عود طبيعي · عنبر · ورد')}${en(FX,Y1+20,1.9,'EAU DE PARFUM · 30 ml',.4)}${star(FX,Y1+27,1.2)}`;
+
+const art = `
+ <clipPath id="cl"><path d="${cut}"/></clipPath>
+ <path d="${cut}" fill="${ink}" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/>
+ <g clip-path="url(#cl)"><rect x="-5" y="-5" width="182" height="220" filter="url(#grain)" opacity=".55"/></g>
+ ${front}${back}${side1}${side2}${lid}${blid}`;
+document.getElementById('art').innerHTML = art;
+
+// dieline view = artwork + cut/fold lines + legend
+const dl = document.getElementById('dieline');
+dl.innerHTML = `<use href="#art"/>
+ <path d="${cut}" fill="none" stroke="#e0007a" stroke-width=".3"/>
+ ${folds.map(f=>`<line x1="${f[0]}" y1="${f[1]}" x2="${f[2]}" y2="${f[3]}" stroke="#00a0e0" stroke-width=".3" stroke-dasharray="1.5 1"/>`).join('')}
+ <text x="${2*W+2*D+G+3}" y="1" font-size="2.2" font-family="Cormorant Garamond" fill="#333" direction="ltr" text-anchor="end">Reverse tuck end<tspan x="${2*W+2*D+G+3}" dy="3">inner 40×40×100 mm · bleed 3 mm · magenta=cut · cyan=fold</tspan></text>`;
+if (location.hash==='#dieline') document.body.classList.add('dieline');
+</script>
+</body>
+</html>
