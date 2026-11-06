@@ -46,6 +46,9 @@ dd{margin:0;font-variant-numeric:tabular-nums}
 .checks{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13px;line-height:1.55}
 .checks li{display:grid;grid-template-columns:18px 1fr;gap:6px}
 .checks li::before{content:"✓";color:var(--accent);font-weight:600}
+.render .side,.render .hud,.render .hint,.render .labels{display:none!important}
+.render .app{grid-template-columns:1fr;height:100%}
+.render .stage{height:100%}
 @media (max-width:860px){
   html,body{height:auto}
   .app{grid-template-columns:1fr;height:auto}
@@ -183,6 +186,19 @@ function floorTex(){
   }
   const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = 8; return t;
 }
+function sunsetTex(){
+  const c = document.createElement('canvas'); c.width = 512; c.height = 288; const g = c.getContext('2d');
+  const sky = g.createLinearGradient(0,0,0,288); sky.addColorStop(0,'#3b3550'); sky.addColorStop(0.45,'#c9805a'); sky.addColorStop(0.62,'#f2c08a'); sky.addColorStop(1,'#5a3a2c');
+  g.fillStyle = sky; g.fillRect(0,0,512,288);
+  g.fillStyle = 'rgba(255,236,190,.9)'; g.beginPath(); g.arc(300,178,16,0,Math.PI*2); g.fill();
+  [['#7a4b3a',170,40],['#5e3a2e',195,28],['#43291f',222,22]].forEach(([col,base,amp],i)=>{
+    g.fillStyle = col; g.beginPath(); g.moveTo(0,288);
+    for(let x=0;x<=512;x+=8) g.lineTo(x, base + Math.sin(x/(60+i*25)+i)*amp*0.5 + Math.sin(x/23+i*2)*amp*0.15);
+    g.lineTo(512,288); g.fill(); });
+  const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; return t;
+}
+const SUNSET = sunsetTex();
+function screenMat(k){ return new THREE.MeshStandardMaterial({color:'#ffffff', roughness:0.3, map:SUNSET, emissive:'#ffffff', emissiveMap:SUNSET, emissiveIntensity:k}); }
 const std = (c, r, extra) => new THREE.MeshStandardMaterial(Object.assign({color:c, roughness: r==null?0.8:r}, extra||{}));
 const woodTex = grainTex('#dcc29c', '150,105,60', 200);
 const MAT = {
@@ -197,8 +213,8 @@ const MAT = {
   taupe: std('#a99079', 0.9),
   white: std('#f6f4f0', 0.5),
   black: std('#1d1c1b', 0.35),
-  screen: std('#0f1720', 0.25, {emissive:'#1b2a38', emissiveIntensity:0.6}),
-  screen2: std('#18222c', 0.25, {emissive:'#3a5266', emissiveIntensity:0.55}),
+  screen: screenMat(0.75),
+  screen2: screenMat(0.65),
   steel: std('#b9b6b1', 0.35, {metalness:0.7}),
   brass: std('#c9a25e', 0.3, {metalness:0.85}),
   glass: std('#cfe3ea', 0.05, {transparent:true, opacity:0.18, depthWrite:false}),
@@ -648,6 +664,12 @@ setMode(false);
 goView('iso', true);
 resize();
 requestAnimationFrame(loop);
+if(location.hash === '#render'){
+  doorArc.visible = false; LABELS.forEach(o=>o.visible=false);
+  document.documentElement.classList.add('render');
+  sun.shadow.mapSize.set(4096, 4096);
+  resize();
+}
 window.__ready = true;
 })();
 </script>
