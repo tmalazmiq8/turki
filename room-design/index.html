@@ -93,7 +93,7 @@ dd{margin:0;font-variant-numeric:tabular-nums}
         <dt>الباب</dt><dd>عرض ١٢٠، يفتح باتجاه كبت الملابس ويستند بعد فتحه بجانبه</dd>
         <dt>كبت الملابس</dt><dd>٢٠٠ × ٦٠ × ٢٤٠، بابان سحاب، على الجدار الأيسر عند الدخول</dd>
         <dt>مكتب الكمبيوتر</dt><dd>١٦٠ × ٦٥ في الركن الأيسر البعيد، وحدة الأدراج على جهة كبت الملابس، ومكان الجلوس والشاشتان ٢٧ بوصة على الجهة المفتوحة مع كرسي مريح</dd>
-        <dt>التلفزيون</dt><dd>٥٥ بوصة (١٢٢ × ٦٩) على الجدار المقابل للباب، بين المكتب وطاولة العطور، ورف عائم تحته</dd>
+        <dt>التلفزيون</dt><dd>٥٥ بوصة (١٢٢ × ٦٩) على الجدار المقابل للباب، بين المكتب وطاولة العطور، معلّق على الجدار بدون كبت تحته</dd>
         <dt>السرير</dt><dd>١٢٠ × ٢٠٠، رأسه على جدار الباب وقدمه باتجاه التلفزيون مباشرة، وكومودينا يمينه</dd>
         <dt>طاولة العطور</dt><dd>بنفس تصميم المرجع على هيئة L في الركن الأيمن البعيد: كل ضلع ١٠٠ شاملًا الركن، عمق ٥٠، سطح رخام أبيض، قاعدتان بدرج وبابين، أربع درجات خشبية متدرجة بإضاءة LED</dd>
         <dt>كبت العطور</dt><dd>٥٠ عرض × ٣٥ عمق × ٢٠٠ ارتفاع، خمسة أرفف بإضاءة LED وباب زجاجي، يمين الطاولة</dd>
@@ -306,8 +306,6 @@ box(167,0.85,157, 146,0.2,221, std('#d4bea0',0.98));
 /* ---------- TV 55" on the wall facing the foot of the bed, centred on the bed ---------- */
 box(BX-1,100,1.5, 122,69,3, MAT.black);
 box(BX+0.5,101.5,4.4, 119,66,0.6, MAT.screen);
-box(BX+2,28,0, 116,16,30, MAT.wood);
-box(BX+4,28,29.9, 112,16,0.6, MAT.woodDark);
 label('<b>تلفزيون ٥٥</b> مقابل قدم السرير', BX+60,184,4);
 
 function arc(cx,cy,r,t0,t1,n){ const p=[]; for(let i=0;i<=n;i++){ const t=t0+(t1-t0)*i/n; p.push([cx+r*Math.cos(t), cy+r*Math.sin(t)]); } return p; }
@@ -596,7 +594,7 @@ function drawPlan(){
   o += `<rect x="40" y="398" width="120" height="16" fill="${bg}"/>`;
   o += `<rect x="398" y="160" width="16" height="80" fill="${bg}"/><line x1="406" y1="160" x2="406" y2="240" stroke="${ink}" stroke-width="1.2"/><line x1="401" y1="160" x2="401" y2="240" stroke="${ink}" stroke-width="0.8"/>`;
   // TV sight corridor
-  o += `<rect x="168" y="30" width="120" height="160" fill="${zone}" fill-opacity=".28" stroke="${acc}" stroke-dasharray="4 3" stroke-width="1"/>`;
+  o += `<rect x="168" y="6" width="120" height="184" fill="${zone}" fill-opacity=".28" stroke="${acc}" stroke-dasharray="4 3" stroke-width="1"/>`;
   o += Tx(228, 115, 'خط مشاهدة خالٍ', 9, 'middle', 0, muted);
   // photo zone
   o += `<rect x="2" y="290" width="160" height="108" fill="${zone}" fill-opacity=".35" stroke="none"/>`;
@@ -625,7 +623,7 @@ function drawPlan(){
   o += R(296,354,40,38,wood) + Tx(316,348,'كومودينا',8,'middle',0,muted);
   o += Tx(326, 205, '٧٢ سم', 9, 'middle', 0, acc);
   // tv
-  o += R(170,0,116,30,wood) + `<rect x="167" y="1" width="122" height="4" fill="${ink}"/>` + Tx(228, 22, 'تلفزيون ٥٥″', 10);
+  o += `<rect x="167" y="1" width="122" height="4" fill="${ink}"/>` + Tx(228, 18, 'تلفزيون ٥٥″', 10);
   // perfume L
   o += `<polygon points="${lp}" fill="${wood}" stroke="${ink}" stroke-width="1.2"/>`;
   tiers.forEach(t => o += `<polyline points="300,${t.d} ${400-t.d},${t.d} ${400-t.d},100" fill="none" stroke="${acc}" stroke-width=".8"/>`);
