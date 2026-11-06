@@ -119,7 +119,7 @@ dd{margin:0;font-variant-numeric:tabular-nums}
         <dt>مكتب الكمبيوتر</dt><dd>١٦٠ × ٦٥ في الركن الأيسر البعيد، بدون أدراج، وجهاز الكمبيوتر تحت المكتب على جهة كبت الملابس، ومكان الجلوس والشاشتان ٢٧ بوصة على الجهة المفتوحة مع كرسي مريح</dd>
         <dt>التلفزيون</dt><dd>٥٥ بوصة (١٢٢ × ٦٩) على الجدار المقابل للباب، بين المكتب وطاولة العطور، معلّق على الجدار بدون كبت تحته</dd>
         <dt>السرير</dt><dd>١٢٠ × ٢٠٠، رأسه على جدار الباب وقدمه باتجاه التلفزيون مباشرة، وكومودينا يمينه</dd>
-        <dt>طاولة العطور</dt><dd>بنفس تصميم المرجع على هيئة L في الركن الأيمن البعيد: كل ضلع ١٠٠ شاملًا الركن، عمق ٥٠، سطح رخام أبيض، قاعدة بدرج وبابين على الضلع الأيمن، والضلع الأيسر مع الركن مفتوح للأرجل (٩٧ سم عرض × ٧٢ ارتفاع)، أربع درجات خشبية للزيوت (ارتفاع ١٥ × عمق ٤ لكل درجة، بحافة مرتفعة ١٫٢ سم تمنع سقوط الزيوت) بإضاءة LED</dd>
+        <dt>طاولة العطور</dt><dd>بنفس تصميم المرجع على هيئة L في الركن الأيمن البعيد: السطح ١٤٠ على جدار التلفزيون و١٠٠ على الجدار الأيمن، عمق ٥٠، سطح رخام أبيض، درجان (٤٠ سم) بدرج وبابين عند الطرفين وبينهما ١٠٠ سم للأرجل، والدرجات ١٠٠ على كل جدار، أربع درجات خشبية للزيوت (ارتفاع ١٥ × عمق ٤ لكل درجة، بحافة مرتفعة ١٫٢ سم تمنع سقوط الزيوت) بإضاءة LED</dd>
         <dt>كبت العطور</dt><dd>٥٠ عرض × ٣٥ عمق × ٢٠٠ ارتفاع، خمسة أرفف بإضاءة LED وباب زجاجي، يمين الطاولة</dd>
         <dt>النافذة والمكيف</dt><dd>نافذة ٨٠ × ١١٠ بمنتصف الجدار الأيمن، والمكيف فوقها مباشرة</dd>
         <dt>كونر القهوة</dt><dd>٨٠ × ٣٨ × ٩٠ تحت النافذة</dd>
@@ -368,7 +368,7 @@ const PB = {
   led:    std('#fff2d6', 0.4, {emissive:'#ffd9a0', emissiveIntensity:1.6}),
   handle: std('#e9e4da', 0.35, {metalness:0.3}),
 };
-const PL = 100, PD = 50, TOP = 76;
+const PL = 100, PD = 50, TOP = 76, NL = 140;   // north-leg worktop runs 40 cm further toward the TV
 // plinth + pedestals with drawer and double doors (same on both legs)
 function pedestalNorth(x0){                 // front faces south (z = PD-2)
   box(x0+2,0,2, 36,7,PD-6, MAT.woodDark);
@@ -384,14 +384,13 @@ function pedestalEast(z0){                  // front faces west (x = W-PD+2)
   box(W-PD+1.2,8,z0+1, 0.8,49,18.7, PB.base); box(W-PD+1.2,8,z0+20.3, 0.8,49,18.7, PB.base);
   box(W-PD-0.4,30,z0+16, 1.6,16,1.6, PB.handle); box(W-PD-0.4,30,z0+22.4, 1.6,16,1.6, PB.handle);
 }
-// north leg left open for the legs (100 cm wide incl. the corner); slim end panel carries the worktop
-box(W-PL,0,1, 3,72,PD-3, PB.base);
+pedestalNorth(W-NL);       // x 260–300, under the extension toward the TV
 pedestalEast(PL-40);       // z 60–100
 // knee-space back panels and worktop
-box(W-PL+3,10,0, PL-3,62,1.5, PB.base); box(W-1.5,10,0, 1.5,62,PL-40, PB.base);
-box(W-PL,72,0, PL,4,PD, PB.marble);
+box(W-PL,10,0, PL,62,1.5, PB.base); box(W-1.5,10,0, 1.5,62,PL-40, PB.base);
+box(W-NL,72,0, NL,4,PD, PB.marble);
 box(W-PD,72,PD, PD,4,PL-PD, PB.marble);
-box(W-PL,71.4,PD-0.6, PL-PD,0.6,0.6, PB.led); box(W-PD-0.6,71.4,PD, 0.6,0.6,PL-PD, PB.led);   // under-edge glow
+box(W-NL,71.4,PD-0.6, NL-PD,0.6,0.6, PB.led); box(W-PD-0.6,71.4,PD, 0.6,0.6,PL-PD, PB.led);   // under-edge glow
 // back panel on both walls
 box(W-PL,TOP,0, PL,64,1.5, PB.oak); box(W-1.5,TOP,1.5, 1.5,64,PL-1.5, PB.oak);
 box(W-PL,TOP+64,0, PL,2,4, PB.base); box(W-4,TOP+64,4, 4,2,PL-4, PB.base);
@@ -459,15 +458,16 @@ function dim(a, b, text, tick){
   const d = document.createElement('div'); d.className = 'lbl dim'; d.innerHTML = text;
   const o = new THREE.CSS2DObject(d); o.position.copy(A).add(B).multiplyScalar(0.5); dimGroup.add(o);
 }
-dim([300,0.5,60],[400,0.5,60], 'ضلع الجدار ١٠٠ سم', [0,0,3]);
-dim([290,0.5,0],[290,0.5,100], 'ضلع الجدار ١٠٠ سم', [3,0,0]);
-dim([296,0,52],[296,TOP,52], 'ارتفاع السطح ٧٦');
-dim([299,TOP+1,0],[299,TOP+1,PD], 'عمق السطح ٥٠', [0,3,0]);
+dim([260,0.5,62],[400,0.5,62], 'ضلع جدار التلفزيون ١٤٠ سم', [0,0,3]);
+dim([250,0.5,0],[250,0.5,100], 'الضلع الأيمن ١٠٠ سم', [3,0,0]);
+dim([256,0,52],[256,TOP,52], 'ارتفاع السطح ٧٦');
+dim([259,TOP+1,0],[259,TOP+1,PD], 'عمق السطح ٥٠', [0,3,0]);
+dim([260,4,52],[300,4,52], 'درج ٤٠', [0,3,0]);
 dim([296,TOP,3],[296,TOP+60,3], '٤ درجات × ١٥ = ٦٠');
 dim([296,TOP,-4],[296,TOP+66,-4], 'اللوح الخلفي ٦٦');
-dim([303,45,49],[400,45,49], 'مساحة الأرجل ٩٧', [0,3,0]);
+dim([300,45,49],[400,45,49], 'مساحة الأرجل بين الدرجين ١٠٠', [0,3,0]);
 dim([318,0,30],[318,72,30], 'ارتفاع تحت السطح ٧٢');
-dim([350,66,100],[350,66,60], 'قاعدة ٤٠', [0,3,0]);
+dim([350,66,100],[350,66,60], 'درج ٤٠', [0,3,0]);
 dim([361,0,153],[361,200,153], 'ارتفاع الكبت ٢٠٠');
 dim([361,204,100],[361,204,150], 'عرض ٥٠', [0,3,0]);
 dim([365,204,153],[400,204,153], 'عمق ٣٥', [0,3,0]);
@@ -656,7 +656,7 @@ function drawPlan(){
         bg = css.getPropertyValue('--bg').trim();
   const R = (x,y,w,h,f,st) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}" stroke="${st||ink}" stroke-width="1.2"/>`;
   const Tx = (x,y,t,sz,anc,rot,col) => `<text x="${x}" y="${y}" font-size="${sz||10}" text-anchor="${anc||'middle'}" ${rot?`transform="rotate(${rot} ${x} ${y})"`:''} fill="${col||ink}">${t}</text>`;
-  const lp = '300,0 400,0 400,100 350,100 350,50 300,50';
+  const lp = '260,0 400,0 400,100 350,100 350,50 260,50';
   let o = '';
   o += `<rect x="-12" y="-12" width="424" height="424" fill="${ink}"/>`;
   o += `<rect x="0" y="0" width="400" height="400" fill="${bg}"/>`;
@@ -696,7 +696,7 @@ function drawPlan(){
   // perfume L
   o += `<polygon points="${lp}" fill="${wood}" stroke="${ink}" stroke-width="1.2"/>`;
   tiers.forEach(t => o += `<polyline points="300,${t.d} ${400-t.d},${t.d} ${400-t.d},100" fill="none" stroke="${acc}" stroke-width=".8"/>`);
-  o += `<rect x="352" y="60" width="47" height="40" fill="none" stroke="${muted}" stroke-dasharray="2 2"/>`;
+  o += `<rect x="260" y="1" width="40" height="47" fill="none" stroke="${muted}" stroke-dasharray="2 2"/><rect x="352" y="60" width="47" height="40" fill="none" stroke="${muted}" stroke-dasharray="2 2"/>`;
   o += Tx(326, 64, 'العطور L', 9);
   o += `<circle cx="335" cy="80" r="14" fill="none" stroke="${muted}" stroke-width="1"/>`;
   o += R(365,100,35,50,wood) + Tx(382, 128, 'كبت ٥ أرفف', 8, 'middle', -90);
@@ -722,7 +722,7 @@ if(location.hash === '#perfume'){
   document.documentElement.classList.add('render','dims');
   document.getElementById('stepDetail').hidden = false;
   sun.shadow.mapSize.set(4096, 4096);
-  camera.position.set(40, 275, 255); controls.target.set(355, 100, 60); controls.update();
+  camera.position.set(10, 280, 265); controls.target.set(340, 100, 60); controls.update();
   resize();
 }
 if(location.hash === '#render'){
