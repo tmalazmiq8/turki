@@ -66,6 +66,7 @@ dd{margin:0;font-variant-numeric:tabular-nums}
         <button id="v-top" aria-pressed="false">مخطط علوي</button>
         <button id="v-bed" aria-pressed="false">من السرير</button>
         <button id="v-perf" aria-pressed="false">ركن العطور</button>
+        <button id="v-desk" aria-pressed="false">المكتب</button>
       </div>
       <div class="grp" role="group" aria-label="الوضع">
         <button id="m-day" aria-pressed="true">الاستخدام اليومي</button>
@@ -92,7 +93,7 @@ dd{margin:0;font-variant-numeric:tabular-nums}
       <dl>
         <dt>الباب</dt><dd>عرض ١٢٠، يفتح باتجاه كبت الملابس ويستند بعد فتحه بجانبه</dd>
         <dt>كبت الملابس</dt><dd>٢٠٠ × ٦٠ × ٢٤٠، بابان سحاب، على الجدار الأيسر عند الدخول</dd>
-        <dt>مكتب الكمبيوتر</dt><dd>١٦٠ × ٦٥ في الركن الأيسر البعيد، وحدة الأدراج على جهة كبت الملابس، ومكان الجلوس والشاشتان ٢٧ بوصة على الجهة المفتوحة مع كرسي مريح</dd>
+        <dt>مكتب الكمبيوتر</dt><dd>١٦٠ × ٦٥ في الركن الأيسر البعيد، بدون أدراج، وجهاز الكمبيوتر تحت المكتب على جهة كبت الملابس، ومكان الجلوس والشاشتان ٢٧ بوصة على الجهة المفتوحة مع كرسي مريح</dd>
         <dt>التلفزيون</dt><dd>٥٥ بوصة (١٢٢ × ٦٩) على الجدار المقابل للباب، بين المكتب وطاولة العطور، معلّق على الجدار بدون كبت تحته</dd>
         <dt>السرير</dt><dd>١٢٠ × ٢٠٠، رأسه على جدار الباب وقدمه باتجاه التلفزيون مباشرة، وكومودينا يمينه</dd>
         <dt>طاولة العطور</dt><dd>بنفس تصميم المرجع على هيئة L في الركن الأيمن البعيد: كل ضلع ١٠٠ شاملًا الركن، عمق ٥٠، سطح رخام أبيض، قاعدتان بدرج وبابين، أربع درجات خشبية متدرجة بإضاءة LED</dd>
@@ -421,10 +422,10 @@ label('<b>كونر القهوة</b> ٨٠×٣٨', 380,108,200);
 
 /* ---------- Computer desk 160 × 65 (north wall, NW corner) ---------- */
 box(0,72,0, 160,3.5,65, MAT.wood);
-[[153,58],[153,3]].forEach(p=>box(p[0],0,p[1], 4,72,4, MAT.woodDark));
-box(2,0,1, 42,72,62, MAT.wood);                                      // drawer pedestal on the wardrobe side
-[8,32,52].forEach(y=>{ box(3,y+2,63, 40,17,0.6, MAT.wood); box(17,y+11,63.4, 12,1.6,1.4, PB.handle); });
-box(132,0,8, 18,42,40, std('#dcd6cc',0.5));                          // PC under the desk
+[[153,58],[153,3],[3,58],[3,3]].forEach(p=>box(p[0],0,p[1], 4,72,4, MAT.woodDark));
+// PC tower where the drawers were (wardrobe side), open space around it
+box(13,0,12, 21,46,45, std('#dcd6cc',0.5));
+box(12.6,30,56.4, 21.8,12,0.6, std('#2a2a2a',0.4)); box(31,38,57.2, 1.2,1.2,0.4, std('#9fd7ff',0.3,{emissive:'#9fd7ff',emissiveIntensity:1.4}));
 function monitor(xc, rot){
   const g = new THREE.Group(); scene.add(g);
   box(-30.75,0,-1.5, 61.5,36,3, MAT.black, g); box(-29.75,1,1.3, 59.5,34,0.4, MAT.screen2, g);
@@ -540,16 +541,17 @@ const VIEWS = {
   top:  {p:[200, 980, 201], t:[200, 0, 200]},
   bed:  {p:[228, 92, 352], t:[228, 128, 0]},
   perf: {p:[205, 175, 225], t:[362, 92, 45]},
+  desk: {p:[235, 200, 170], t:[40, 30, 35]},
 };
 let anim = null;
 function goView(name, instant){
   const v = VIEWS[name];
-  ['iso','door','top','bed','perf'].forEach(k=>document.getElementById('v-'+k).setAttribute('aria-pressed', String(k===name)));
+  ['iso','door','top','bed','perf','desk'].forEach(k=>document.getElementById('v-'+k).setAttribute('aria-pressed', String(k===name)));
   const p1 = new THREE.Vector3(...v.p), t1 = new THREE.Vector3(...v.t);
   if(instant || matchMedia('(prefers-reduced-motion: reduce)').matches){ camera.position.copy(p1); controls.target.copy(t1); controls.update(); return; }
   anim = {p0: camera.position.clone(), t0: controls.target.clone(), p1, t1, s: performance.now()};
 }
-['iso','door','top','bed','perf'].forEach(k=>document.getElementById('v-'+k).addEventListener('click',()=>goView(k)));
+['iso','door','top','bed','perf','desk'].forEach(k=>document.getElementById('v-'+k).addEventListener('click',()=>goView(k)));
 document.getElementById('m-day').addEventListener('click',()=>setMode(false));
 document.getElementById('m-photo').addEventListener('click',()=>setMode(true));
 const lblBtn = document.getElementById('t-lbl');
@@ -614,8 +616,8 @@ function drawPlan(){
   o += R(0,75,60,200,wood) + `<line x1="57" y1="75" x2="57" y2="176" stroke="${ink}" stroke-width="1"/><line x1="54" y1="174" x2="54" y2="275" stroke="${ink}" stroke-width="1"/>`;
   o += Tx(32, 175, 'كبت الملابس ٢٠٠×٦٠', 10, 'middle', -90);
   // desk + chair
-  o += R(0,0,160,65,wood) + R(2,1,42,62,bg) + `<rect x="41" y="18" width="62" height="4" fill="${ink}"/><rect x="104" y="18" width="62" height="4" fill="${ink}"/>`;
-  o += Tx(23, 36, 'أدراج', 8, 'middle', 0, muted) + Tx(102, 50, 'مكتب ١٦٠×٦٥', 9);
+  o += R(0,0,160,65,wood) + R(13,12,21,45,bg) + `<rect x="41" y="18" width="62" height="4" fill="${ink}"/><rect x="104" y="18" width="62" height="4" fill="${ink}"/>`;
+  o += Tx(23.5, 38, 'PC', 8, 'middle', 0, muted) + Tx(102, 50, 'مكتب ١٦٠×٦٥', 9);
   o += `<circle cx="104" cy="112" r="27" fill="none" stroke="${ink}" stroke-width="1.2"/>` + Tx(104,115,'كرسي',8);
   // bed
   o += R(161,392,134,8,wood) + R(166,190,124,202,wood) + R(174,350,50,34,bg) + R(232,350,50,34,bg);
