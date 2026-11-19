@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>ستيكر إرشادات السلامة</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
   @page { size: 90mm 60mm; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,86 +11,83 @@
   body { font-family: 'Tajawal', sans-serif; color: #111; }
   .sticker {
     width: 90mm; height: 60mm; background: #fff;
-    border: 0.6mm solid #111; border-radius: 4mm;
+    border: 0.5mm solid #111; border-radius: 4mm;
     padding: 3mm 3.5mm; display: flex; flex-direction: column;
   }
   .head { display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 0.3mm solid #111; padding-bottom: 1.5mm; }
-  .head h1 { font-size: 11pt; font-weight: 800; line-height: 1.1; }
-  .head small { display: block; font-size: 6pt; font-weight: 500; letter-spacing: .3px; direction: ltr; text-align: right; color: #333; }
-  .notice { margin-top: 1.6mm; background: #111; color: #fff; border-radius: 1.5mm;
-    font-size: 6.6pt; font-weight: 700; padding: 1mm 2mm; text-align: center; line-height: 1.35; }
-  ul { list-style: none; margin-top: 1.6mm; display: grid; grid-template-columns: 1fr 1fr; gap: 1.1mm 3mm; flex: 1; }
-  li { display: flex; align-items: center; gap: 1.5mm; font-size: 6.3pt; font-weight: 500; line-height: 1.25; }
-  li svg { flex: 0 0 4.6mm; width: 4.6mm; height: 4.6mm; }
-  .foot { display: flex; align-items: center; justify-content: space-between;
-    border-top: 0.3mm solid #111; padding-top: 1.3mm; font-size: 5.6pt; font-weight: 500; }
-  .foot .recycle { display: flex; align-items: center; gap: 1.2mm; font-weight: 700; }
-  .foot .recycle svg { width: 4.6mm; height: 4.6mm; }
-  .boxes { display: flex; gap: 2mm; }
-  .boxes span { border-bottom: 0.25mm dotted #111; padding: 0 0 0.2mm; min-width: 14mm; display: inline-block; }
+    border-bottom: 0.3mm solid #111; padding-bottom: 1.6mm; }
+  .head h1 { font-size: 10.5pt; font-weight: 800; line-height: 1.1; }
+  .head h1 span { display: block; font-family: 'Inter', sans-serif; font-size: 6.4pt; font-weight: 700; letter-spacing: .6px; direction: ltr; text-align: right; margin-top: .6mm; }
+  .icons { display: flex; align-items: center; gap: 1.8mm; direction: ltr; }
+  .icons svg { height: 9mm; width: auto; }
+  .cols { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; padding-top: 1.8mm; }
+  .col ul { list-style: none; }
+  .col li { position: relative; font-size: 6.4pt; line-height: 1.32; margin-bottom: .75mm; padding-inline-start: 2.2mm; }
+  .col li::before { content: ''; position: absolute; inset-inline-start: 0; top: 1.25mm; width: 1mm; height: 1mm; background: #111; border-radius: 50%; }
+  .col.en { direction: ltr; text-align: left; font-family: 'Inter', sans-serif; border-left: 0.25mm solid #111; padding-left: 3mm; }
+  .col.en li { font-size: 5.5pt; line-height: 1.36; }
+  .col.en li::before { top: 1.05mm; }
+  .col.en { order: 2; }
+  .col.ar { order: 1; }
+  b { font-weight: 800; }
 </style>
 </head>
 <body>
 <div class="sticker">
   <div class="head">
-    <div>
-      <h1>إرشادات السلامة</h1>
-      <small>SAFETY INSTRUCTIONS</small>
+    <h1>إرشادات السلامة<span>SAFETY WARNINGS</span></h1>
+    <div class="icons">
+      <!-- GHS02 Flammable -->
+      <svg viewBox="0 0 40 40" aria-label="Flammable">
+        <path d="M20 2 L38 20 L20 38 L2 20 Z" fill="#fff" stroke="#111" stroke-width="2.6" stroke-linejoin="round"/>
+        <path d="M20 9c3 4 6 6.5 6 11.5a6 6 0 0 1-12 0c0-2.6 1.2-4.2 2.6-5.6.2 2 1 3.2 2.2 3.6-.6-3.6.2-6.6 1.2-9.5z" fill="#111"/>
+        <rect x="12" y="27.5" width="16" height="2" rx="1" fill="#111"/>
+      </svg>
+      <!-- Keep away from children -->
+      <svg viewBox="0 0 40 40" aria-label="Keep out of reach of children">
+        <circle cx="20" cy="20" r="17.5" fill="#fff" stroke="#111" stroke-width="2.6"/>
+        <circle cx="20" cy="11.5" r="3.2" fill="#111"/>
+        <path d="M14 17h12l-1.6 7.5h-1.6L22 31h-4l-.8-6.5h-1.6z" fill="#111"/>
+        <path d="M7.6 7.6l24.8 24.8" stroke="#111" stroke-width="2.6"/>
+      </svg>
+      <!-- PAO 36M -->
+      <svg viewBox="0 0 44 40" aria-label="Period after opening 36 months">
+        <path d="M6 15 L5 15 Q4 15 4.2 16 L7.5 35 Q8 37.5 10.5 37.5 H33.5 Q36 37.5 36.5 35 L39.8 16 Q40 15 39 15 Z" fill="#fff" stroke="#111" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M7 11.5 L36 3.5" stroke="#111" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M8 11 L7.2 8 Q7 7 8 6.8 L34 0.9" fill="none" stroke="#111" stroke-width="0"/>
+        <path d="M8.5 11.2 L7.8 8.4 L35 1 L35.8 3.6" fill="none" stroke="#111" stroke-width="2.2" stroke-linejoin="round"/>
+        <text x="22" y="31.5" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="12.5" fill="#111">36M</text>
+      </svg>
+      <!-- Recycle -->
+      <svg viewBox="0 0 40 40" aria-label="Recyclable">
+        <text x="20" y="31" text-anchor="middle" font-family="DejaVu Sans" font-size="32" fill="#111">&#9851;</text>
+      </svg>
     </div>
-    <!-- flammable pictogram -->
-    <svg width="9mm" height="9mm" viewBox="0 0 40 40" aria-label="قابل للاشتعال">
-      <path d="M20 2 L38 20 L20 38 L2 20 Z" fill="#fff" stroke="#111" stroke-width="2.4" stroke-linejoin="round"/>
-      <path d="M20 9c3 4 6 6.5 6 11.5a6 6 0 0 1-12 0c0-2.6 1.2-4.2 2.6-5.6.2 2 1 3.2 2.2 3.6-.6-3.6.2-6.6 1.2-9.5z" fill="#111"/>
-      <rect x="12" y="27.5" width="16" height="2" rx="1" fill="#111"/>
-    </svg>
   </div>
 
-  <div class="notice">
-    تم فتح العبوة الأصلية للعطر العالمي وإعادة تعبئته في عبوة أخرى
-  </div>
-
-  <ul>
-    <li>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5.2 1.6.8 2.5 1.8 2.8C10.4 8 11 5.5 12 3z"/></svg>
-      مادة قابلة للاشتعال، تُحفظ بعيدًا عن النار والحرارة
-    </li>
-    <li>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/><path d="M4 4l16 16"/></svg>
-      تجنّب ملامسة العينين، وعند الملامسة اغسلها بالماء
-    </li>
-    <li>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="6" r="2.6"/><path d="M8 21v-6l-2-3 3-3h6l3 3-2 3v6"/><circle cx="12" cy="12" r="10.5"/><path d="M4.6 4.6l14.8 14.8"/></svg>
-      يُحفظ بعيدًا عن متناول الأطفال
-    </li>
-    <li>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
-      يُحفظ في مكان بارد وجاف بعيدًا عن أشعة الشمس
-    </li>
-    <li>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><path d="M7 21V11a2 2 0 0 1 4 0v-1a2 2 0 0 1 4 0v1a2 2 0 0 1 4 0v5a5 5 0 0 1-5 5H7z"/><path d="M3 3l3 3M9 2v3M2 9h3"/></svg>
-      للاستعمال الخارجي فقط، جرّبه على جزء صغير من الجلد
-    </li>
-    <li>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg>
-      لا تستخدمه على الجلد المتهيّج، وأوقفه عند التحسّس
-    </li>
-    <li>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><path d="M8 3h8M10 3v3h4V3"/><rect x="6" y="6" width="12" height="15" rx="2"/><path d="M4 21L20 6"/></svg>
-      لا تثقب العبوة ولا تحرقها حتى بعد انتهائها
-    </li>
-    <li>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2"/></svg>
-      أغلق الغطاء جيدًا بعد كل استخدام
-    </li>
-  </ul>
-
-  <div class="foot">
-    <div class="recycle">
-      <span style="font-family:'DejaVu Sans';font-size:11pt;line-height:1">&#9851;</span>
-      أعد تدوير العبوة بعد الاستخدام
+  <div class="cols">
+    <div class="col ar">
+      <ul>
+        <li><b>قابل للاشتعال.</b> يُحفظ بعيدًا عن النار والحرارة ومصادر الاشتعال.</li>
+        <li>للاستعمال الخارجي فقط.</li>
+        <li>تجنّب ملامسة العينين، وفي حال الملامسة اشطفهما بالماء جيدًا.</li>
+        <li>لا يُستخدم على الجلد المتهيّج أو المجروح، ويُوقف عند حدوث تحسّس.</li>
+        <li>يُحفظ بعيدًا عن متناول الأطفال.</li>
+        <li>يُحفظ في مكان بارد وجاف بعيدًا عن أشعة الشمس المباشرة.</li>
+        <li>لا يُرشّ قرب اللهب ولا يُبلع.</li>
+      </ul>
     </div>
-    <div class="boxes">تاريخ التعبئة: <span></span></div>
+    <div class="col en">
+      <ul>
+        <li><b>FLAMMABLE.</b> Keep away from heat, sparks and open flame.</li>
+        <li>For external use only.</li>
+        <li>Avoid contact with eyes. If contact occurs, rinse thoroughly with water.</li>
+        <li>Do not apply on irritated or broken skin. Discontinue use if irritation occurs.</li>
+        <li>Keep out of reach of children.</li>
+        <li>Store in a cool, dry place away from direct sunlight.</li>
+        <li>Do not spray near flame. Do not swallow.</li>
+      </ul>
+    </div>
   </div>
 </div>
 </body>
